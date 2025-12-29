@@ -2,7 +2,7 @@
 
 This plugin takes in a text selection (a link) and expands the link by placing the first H1 header found in the target note before the link.
 
-The link can be partial (e.g. UID). The plugin uses The Archive's search matching algorithm and picks the "best match" if provided. If no unambiguous match is available, the link will not be expanded.
+The link can be partial (e.g. UID). The plugin uses The Archive's internal search matching algorithm and picks the "best match" if found. If no unambiguous match is available, the link will not be expanded.
 
 **Example 1:**
 
