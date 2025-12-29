@@ -1,0 +1,28 @@
+{
+  "appVersion" : "1.8.0",
+  "authors" : [
+    {
+      "name" : "JW"
+    }
+  ],
+  "dependencies" : [
+
+  ],
+  "description" : "# Link expander plugin for The Archive\n\nThis plugin takes in a text selection (a link) and expands the link by placing the first H1 header found in the target note before the link.\n\nThe link can be partial (e.g. UID). The plugin uses The Archive's search matching algorithm and picks the \"best match\" if provided. If no unambiguous match is available, the link will not be expanded.\n\n**Example 1:**\n\n```\n[[202512291813]]\n```\n\nwill transform to:\n\n```\nThis is a note's first H1 header [[202512291813]]\n```\n\n**Example 2:**\n\n```\n202512291813\n```\n\nwill transform to:\n\n```\nThis is a note's first H1 header 202512291813\n```",
+  "identifier" : "com.idonthavedomain.linkexpander",
+  "input" : {
+    "notes" : [
+      "all"
+    ],
+    "pasteboard" : false,
+    "text" : [
+      "selected"
+    ]
+  },
+  "output" : {
+    "insertText" : true
+  },
+  "releaseDate" : "2025-12-29",
+  "title" : "Link expander",
+  "version" : "0.0.1"
+}
