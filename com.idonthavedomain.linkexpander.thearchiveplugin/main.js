@@ -53,7 +53,8 @@ selection.split(LINEBR).forEach(elem =>
 
         if (!linkMatch)
         {
-            cancel("General link parsing error");
+            console.log(`General link parsing error for line: ${elem}`);
+            return;
         }
 
         const link = linkMatch[1];

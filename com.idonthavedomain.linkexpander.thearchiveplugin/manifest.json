@@ -22,7 +22,7 @@
   "output" : {
     "insertText" : true
   },
-  "releaseDate" : "2026-02-09",
+  "releaseDate" : "2026-02-11",
   "title" : "Link expander",
-  "version" : "0.1.0"
+  "version" : "0.1.1"
 }
