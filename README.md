@@ -1,4 +1,4 @@
-# Link expander plugin for The Archive
+# Link expander plugin for [The Archive](https://zettelkasten.de/the-archive/)
 
 This plugin takes in a text selection (a link/list of links separated by newline) and expands the link(s) by placing the first H1 header found in the target note before the link.
 
