@@ -8,10 +8,11 @@
   "dependencies" : [
 
   ],
-  "description" : "# Link expander plugin for The Archive\n\nThis plugin takes in a text selection (a link) and expands the link by placing the first H1 header found in the target note before the link.\n\nThe link can be partial (e.g. UID). The plugin uses The Archive's search matching algorithm and picks the \"best match\" if provided. If no unambiguous match is available, the link will not be expanded.\n\n**Example 1:**\n\n```\n[[202512291813]]\n```\n\nwill transform to:\n\n```\nThis is a note's first H1 header [[202512291813]]\n```\n\n**Example 2:**\n\n```\n202512291813\n```\n\nwill transform to:\n\n```\nThis is a note's first H1 header 202512291813\n```",
+  "description" : "Link expander transforms (working) wikilinks to description-link pairs.\n\nFor example\n[[202512291813]]\nwill produce\nDescription of link [[202512291813]]\n",
   "identifier" : "com.idonthavedomain.linkexpander",
   "input" : {
     "notes" : [
+      "selected",
       "all"
     ],
     "pasteboard" : false,
@@ -22,7 +23,7 @@
   "output" : {
     "insertText" : true
   },
-  "releaseDate" : "2026-02-11",
+  "releaseDate" : "2026-02-25",
   "title" : "Link expander",
-  "version" : "0.1.1"
+  "version" : "0.2.0"
 }
