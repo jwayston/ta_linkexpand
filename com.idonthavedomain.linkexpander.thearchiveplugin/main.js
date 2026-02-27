@@ -7,71 +7,39 @@ Author: JW
 
 "use strict";
 
-const LINEBR = "\n";
-const selection = input.text.selected.normalize("NFC");
-const currentNote = input.notes.selected[0].filename;
-const regexLink = new RegExp(/\[{0,}(.+?)(\]{1,}|$)/);
-const regexIdDesc = new RegExp(/([0-9]{12,}|[0-9]{6,}.*?(?=\s|$)|.*?(?=\s|$))\s?(.*)/);
-const regexNoteHeader = new RegExp("(?<=^|\\n)# (.+)\\n");
+const uidSet = new Set();
+const selected = input.text.selected;
 
-if (!selection)
-    cancel("Please provide a text selection");
+const extractLink = text => text.match(/\[\[(.*?)\]\]/)?.[1];
+const getHeader = content => 
+    content.match(/(?:^|\n)# (.+)/)?.[1] ?? "<No H1 header>";
 
-
-function extractHeader(noteContent)
-{
-    const headerMatch = noteContent.match(regexNoteHeader);
-    return !headerMatch ? "<No H1 header detected>" : headerMatch[1];
+const getNoteData = (filename, content) => {
+    const [_, id, desc] = filename.match(/^(\d{6,}\S*)\s*(.*)/) ?? [];
+    return id ? { id, desc: desc.trim() || getHeader(content) } : null;
 }
 
-function findNote(linkText)
-{
-    let matchIdDesc;
-    let noteFound = false;
-    const matchSearch = app.search(linkText)
-
-    if (matchSearch.bestMatch && matchSearch.bestMatch.filename !== currentNote)
-        noteFound = true;
-
-    if (noteFound)
-        matchIdDesc = matchSearch.bestMatch.filename.match(regexIdDesc);
-    else
-        matchIdDesc = linkText.match(regexIdDesc);
-
-    if (!matchIdDesc)
-        return `<Error: cannot extract any remotely ID-like from the link> ${selection}`;
-
-    const id = matchIdDesc[1];
-    const desc = matchIdDesc[2];
-
-    if (!desc && noteFound)
-        return `${extractHeader(matchSearch.bestMatch.content)} [[${id}]]`;
-
-    return `${desc} [[${id}]]`;
+const findNote = id => {
+    const m = app.search(id, false).bestMatch;
+    return m?.filename.startsWith(id) && m;
 }
 
-function parseLines()
-{
-    let outputText = "";
+const extractDescription = text => {
+    const link = extractLink(text);
+    const note = findNote(link);
+    if (!note) return;
 
-    for (const line of selection.split(LINEBR))
-    {
-        const matchLink = line.match(regexLink);
-
-        if (!matchLink)
-        {
-            console.log(`General link parsing error for line: ${line}`);
-            outputText += `${line}\n`;
-            continue;
-        }
-
-        const link = matchLink[1];
-        const expandedLinkText = findNote(link);
-        outputText += `${expandedLinkText}\n`;
-    }
-
-    return outputText.replace(/\n$/, "");
+    const data = getNoteData(note.filename, note.content);
+    const line = data
+        ? `${data.desc} [[${data.id}]]`
+        : `<Error: invalid UID> [[${text}]]`;
+    return line;	
 }
 
-output.insert.text = parseLines();
+const out = selected.split("\n")
+    .map(extractDescription)
+    .join("\n");
+
+output.insert.text = out;
+
 
