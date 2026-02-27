@@ -4,16 +4,20 @@ This plugin takes in a text selection (a link/list of links separated by newline
 
 The link can be partial (UID) or a full filename. Link description is extracted primarily from the actual filename and secondarily from the first appearing H1 heading. Links to non-existing notes are parsed in-place.
 
-**Examples**:
+**Example**:
 
-1. `[[202512291813]]`
-  - `This is a note [[202512291813]]`
+```
+[[202512291813]]
+202512291813
+[[202512292021 This is another note]]
+[[202512301240 Non-existing link]]
+```
 
-2. `202512291813`
-  - `This is a note [[202512291813]]`
+will be transformed to
 
-3. `[[202512292021 This is another note]]`
-  - `This is another note [[202512292021]]`
-
-4. `[[202512301240 Non-existing link]]`
-  - `Non-existing link [[202512301240]]`
+```
+This is a note [[202512291813]]
+This is a note [[202512291813]]
+This is another note [[202512292021]]
+Non-existing link [[202512301240]]
+```

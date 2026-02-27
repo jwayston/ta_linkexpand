@@ -8,7 +8,7 @@
   "dependencies" : [
 
   ],
-  "description" : "Link expander transforms (working) wikilinks to description-link pairs.\n\nFor example\n[[202512291813]]\nwill produce\nDescription of link [[202512291813]]\n",
+  "description" : "Link expander transforms wikilinks to description-link pairs.\n\nFor example\n[[202512291813]]\nwill produce\nDescription of link [[202512291813]]\n",
   "identifier" : "com.idonthavedomain.linkexpander",
   "input" : {
     "notes" : [
@@ -23,7 +23,7 @@
   "output" : {
     "insertText" : true
   },
-  "releaseDate" : "2026-02-26",
+  "releaseDate" : "2026-02-27",
   "title" : "Link expander",
-  "version" : "0.2.1"
+  "version" : "0.2.2"
 }
