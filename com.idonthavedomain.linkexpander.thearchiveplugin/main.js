@@ -26,14 +26,13 @@ const findNote = id => {
 
 const extractDescription = text => {
     const link = extractLink(text);
-    const note = findNote(link);
-    if (!note) return;
+    let note = findNote(link);
 
-    const data = getNoteData(note.filename, note.content);
-    const line = data
-        ? `${data.desc} [[${data.id}]]`
-        : `<Error: invalid UID> [[${text}]]`;
-    return line;	
+    const data = note && getNoteData(note.filename, note.content);
+    const id = data?.id || link?.split(" ")[0] || text;
+    const desc = data?.desc || link?.slice(link.indexOf(" ") + 1).trim() || "<No descr>";
+
+    return `${desc} [[${id}]]`;
 }
 
 const out = selected.split("\n")
